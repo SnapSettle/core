@@ -2,13 +2,19 @@
   description = "Core flake exposing tools and utilities provided by SnapSettle";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    nixpkgs.url = "flake:nixpkgs";
 
     dashnix.url = "github:snapsettle/dashnix";
+    dashnix.inputs.nixpkgs.follows = "nixpkgs";
+
     nix-helpers.url = "github:snapsettle/nix-helpers";
+    nix-helpers.inputs.nixpkgs.follows = "nixpkgs";
+
     gitgetter.url = "github:snapsettle/gitgetter";
+    gitgetter.inputs.nixpkgs.follows = "nixpkgs";
 
     treefmt-nix.url = "github:numtide/treefmt-nix";
+    treefmt-nix.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs =
