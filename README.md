@@ -6,9 +6,9 @@ Instead of managing multiple individual repository URLs in your system configura
 
 ## Included Projects
 
-* **dashnix** (NixOS Module)
-* **nix-helpers** (NixOS Module & Package)
-* **gitgetter** (NixOS Module & Package)
+- (Dashnix)[https://github.com/SnapSettle/Dashnix] (NixOS Module)
+- (nix-helpers)[https://github.com/SnapSettle/nix-helpers] (NixOS Module & Package)
+- (gitgetter)[https://github.com/SnapSettle/gitgetter] (NixOS Module & Package)
 
 ## Getting Started
 
@@ -21,7 +21,7 @@ inputs = {
   nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
   
   # Add the SnapSettle core flake
-  core.url = "github:snapsettle/core";
+  snapcore.url = "github:snapsettle/snapcore";
 };
 
 ```
@@ -33,11 +33,11 @@ You can either enable **all** SnapSettle modules at once using the `.default` mo
 #### Option A: Enable everything automatically (Recommended)
 
 ```nix
-outputs = { nixpkgs, core, ... }: {
+outputs = { nixpkgs, snapcore, ... }: {
   nixosConfigurations.mySystem = nixpkgs.lib.nixosSystem {
     system = "x86_64-linux";
     modules = [
-      core.nixosModules.default # Dynamically imports all available modules
+      snapcore.nixosModules.default # Dynamically imports all available modules
       ./configuration.nix
     ];
   };
@@ -48,12 +48,12 @@ outputs = { nixpkgs, core, ... }: {
 #### Option B: Enable specific modules manually
 
 ```nix
-outputs = { nixpkgs, core, ... }: {
+outputs = { nixpkgs, snapcore, ... }: {
   nixosConfigurations.mySystem = nixpkgs.lib.nixosSystem {
     system = "x86_64-linux";
     modules = [
-      core.nixosModules.dashnix
-      core.nixosModules.gitgetter
+      snapcore.nixosModules.dashnix
+      snapcore.nixosModules.gitgetter
       ./configuration.nix
     ];
   };
@@ -70,8 +70,8 @@ If you want to use the CLI tools without enabling their respective NixOS configu
 ```nix
 { pkgs, inputs, ... }: {
   environment.systemPackages = [
-    inputs.core.packages.${pkgs.system}.gitgetter
-    inputs.core.packages.${pkgs.system}.nix-helpers
+    inputs.snapcore.packages.${pkgs.system}.gitgetter
+    inputs.snapcore.packages.${pkgs.system}.nix-helpers
   ];
 }
 
@@ -82,7 +82,7 @@ If you want to use the CLI tools without enabling their respective NixOS configu
 You can run tools immediately using `nix run` without installing them permanently:
 
 ```bash
-nix run github:snapsettle/core#gitgetter -- --help
+nix run github:snapsettle/snapcore#gitgetter -- --help
 
 ```
 
