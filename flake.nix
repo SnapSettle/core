@@ -2,7 +2,7 @@
   description = "Core flake exposing tools and utilities provided by SnapSettle";
 
   inputs = {
-    nixpkgs.url = "flake:nixpkgs";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
 
     dashnix.url = "github:snapsettle/dashnix";
     dashnix.inputs.nixpkgs.follows = "nixpkgs";
