@@ -49,27 +49,23 @@
       );
 
       nixosModules = {
-        snapcore = {
-          dashnix = dashnix.nixosModules.default;
-          nix-helpers = nix-helpers.nixosModules.default;
-          gitgetter = gitgetter.nixosModules.default;
+        dashnix = dashnix.nixosModules.default;
+        nix-helpers = nix-helpers.nixosModules.default;
+        gitgetter = gitgetter.nixosModules.default;
 
-          default = {
-            imports = [
-              dashnix.nixosModules.default
-              nix-helpers.nixosModules.default
-              gitgetter.nixosModules.default
-            ];
-          };
+        default = {
+          imports = [
+            dashnix.nixosModules.default
+            nix-helpers.nixosModules.default
+            gitgetter.nixosModules.default
+          ];
         };
       };
 
       packages = nixpkgs.lib.genAttrs systems (system: {
-        snapcore = {
-          dashnix = dashnix.packages.${system}.default;
-          nix-helpers = nix-helpers.packages.${system}.default;
-          gitgetter = gitgetter.packages.${system}.default;
-        };
+        dashnix = dashnix.packages.${system}.default;
+        nix-helpers = nix-helpers.packages.${system}.default;
+        gitgetter = gitgetter.packages.${system}.default;
       });
     };
 }
